@@ -107,7 +107,7 @@ const Modal: React.FC<ModalProps>  = ({
                                     transition
                                 "
                             >
-                                <AiOutlineClose size={20}/>
+                                <AiOutlineClose size={20} onClick={handleClose}/>
                             </button>
                         </div>
                         {/* Body */}
