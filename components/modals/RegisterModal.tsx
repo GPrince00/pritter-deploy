@@ -1,32 +1,35 @@
 'use client'
 import { useCallback, useState } from "react";
 import useLoginModal from "@/hooks/useLoginModal";
-import Input from "../input";
-import Modal from "../Modal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 
-const LoginModal = () => {
+import Input from "../input";
+import Modal from "../Modal";
+
+const RegisterModal = () => {
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const onToggle = useCallback(() => {
         if (isLoading) return;
 
-        loginModal.onClose();
-        registerModal.onOpen();
+        registerModal.onClose();
+        loginModal.onOpen();
     }, [isLoading, registerModal, loginModal]);
 
     const onSubmit = useCallback(async () => {
         try {
             setIsLoading(true);
 
-            // TODO ADD LOG IN
+            // TODO ADD REGISTER AND LOGIN
             
-            loginModal.onClose();
+            registerModal.onClose();
         } catch (error) {
             console.log(error);
         } finally {
@@ -43,6 +46,18 @@ const LoginModal = () => {
                 disabled={isLoading}
             />
             <Input 
+                placeholder="Namer"
+                onChange={(e) => setEmail(e.target.value)}
+                value={name}
+                disabled={isLoading}
+            />
+            <Input 
+                placeholder="Username"
+                onChange={(e) => setEmail(e.target.value)}
+                value={username}
+                disabled={isLoading}
+            />
+            <Input 
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -53,7 +68,7 @@ const LoginModal = () => {
 
     const footerContent = (
         <div className="text-neutral-400 text-center mt-4">
-            <p>First time using Twitter?
+            <p>Already have an account?
                 <span
                     onClick={onToggle}
                     className="
@@ -61,7 +76,7 @@ const LoginModal = () => {
                         cursor-pointer
                         hover:underline
                     "
-                > Create an account</span>
+                > Sign in</span>
             </p>
         
         </div>
@@ -70,10 +85,10 @@ const LoginModal = () => {
     return (
         <Modal
             disabled={isLoading}
-            isOpen={loginModal.isOpen}
-            title="Login"
-            actionLabel="Sign in"
-            onClose={loginModal.onClose}
+            isOpen={registerModal.isOpen}
+            title="Create an account"
+            actionLabel="Register"
+            onClose={registerModal.onClose}
             onSubmit={onSubmit}
             body={bodyContent}
             footer={footerContent}
@@ -81,4 +96,4 @@ const LoginModal = () => {
     );
 };
 
-export default LoginModal;
+export default RegisterModal;
