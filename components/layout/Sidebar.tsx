@@ -4,7 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { signOut } from "next-auth/react";
 
 import SidebarLogo from "./SidebarLogo";
-import SidebarItem from "../SidebarItem";
+import SidebarItem from "./SidebarItem";
 import SidebarTweetButton from "./SidebarTweetButton";
 import useCurrentUser from "@/hooks/useCurrentUser";
 
@@ -21,11 +21,13 @@ const Sidebar = () => {
       label: "Notifications",
       href: "/notifications",
       icon: BsBellFill,
+      auth: true
     },
     {
       label: "Profile",
       href: "/users/123",
       icon: FaUser,
+      auth: true
     },
   ];
   return (
@@ -39,6 +41,7 @@ const Sidebar = () => {
               href={item.href}
               label={item.label}
               icon={item.icon}
+              auth={item.auth}
             />
           ))}
           {currentUser && (
