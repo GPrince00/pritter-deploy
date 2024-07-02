@@ -15,7 +15,7 @@ export default async function handler(
 
     const notifications = await prisma.notification.findMany({
       where: {
-        id: userId,
+        userId,
       },
       orderBy: {
         createdAt: "desc",
@@ -23,13 +23,14 @@ export default async function handler(
     });
 
     await prisma.user.update({
-        where: {
-            id: userId
-        },
-        data: {
-            hasNotification: false
-        }
-    })
+      where: {
+        id: userId,
+      },
+      data: {
+        hasNotification: false,
+      },
+    });
+
     return res.status(200).json(notifications);
   } catch (error) {
     console.log(error);
