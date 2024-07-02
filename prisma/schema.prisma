@@ -27,11 +27,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   followingIds String[] @db.ObjectId
-  hasNotifications Boolean?
+  hasNotification Boolean?
 
   post Post[]
   comments Comment[]
-  notification Notificarion[]
+  notification Notification[]
 }
 
 model Post {
@@ -58,7 +58,7 @@ model Comment {
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
-model Notificarion {
+model Notification {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   body String
   userId String @db.ObjectId
