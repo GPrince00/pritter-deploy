@@ -10,7 +10,7 @@ import usePosts from "./usePosts";
 const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
   const { data: currentUser } = useCurrentUser();
   const { data: fetchedPost, mutate: mutateFetchedPost } = usePost(postId);
-  const { data: mutateFetchedPosts } = usePosts(userId);
+  const { mutate: mutateFetchedPosts } = usePosts(userId);
 
   const loginModal = useLoginModal();
 
@@ -38,7 +38,7 @@ const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
 
       toast.success("Success");
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error(`Something went wrong, ${error}`);
     }
   }, [
     currentUser,
