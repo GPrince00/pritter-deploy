@@ -8,7 +8,7 @@ import useUser from "./useUser";
 
 const useFollow = (userId: string) => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { mutate: mutateFecherUser } = useUser(userId);
+  const { mutate: mutateFetchedUser } = useUser(userId);
 
   const loginModal = useLoginModal();
 
@@ -33,7 +33,7 @@ const useFollow = (userId: string) => {
       await request();
 
       mutateCurrentUser();
-      mutateFecherUser();
+      mutateFetchedUser();
 
       toast.success("Success");
     } catch (error) {
@@ -44,7 +44,7 @@ const useFollow = (userId: string) => {
     isFollowing,
     userId,
     mutateCurrentUser,
-    mutateFecherUser,
+    mutateFetchedUser,
     loginModal,
   ]);
 
